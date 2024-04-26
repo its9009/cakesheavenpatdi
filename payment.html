@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>payment</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .form-container {
+      width: 90%;
+      max-width: 600px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .form input[type="text"],
+    .form input[type="email"],
+    .form input[type="tel"],
+    .form input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    .form label {
+      margin-top: 10px;
+    }
+
+    .form button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff; /* Blue color */
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form button:hover {
+      background-color: #0056b3; /* Darker blue color on hover */
+    }
+
+    #price {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    .safety-info {
+ text-align: center;
+ margin-bottom: 20px;
+}
+
+.safety-info h3 {
+ font-size: 20px;
+ color: #333;
+}
+
+.safety-info p {
+ font-size: 16px;
+ color: #666;
+}
+
+
+    @media (max-width: 768px) {
+ .form-container {
+    padding: 15px;
+ }
+
+ .form input[type="text"],
+ .form input[type="email"],
+ .form input[type="tel"],
+ .form input[type="number"] {
+    font-size: 14px;
+ }
+
+ .form label {
+    font-size: 14px;
+ }
+
+ .form button {
+    font-size: 14px;
+ }
+}
+@keyframes buttonHover {
+  0% {
+    transform: scale(1);
+ }
+  50% {
+    transform: scale(1.05);
+ }
+  100% {
+    transform: scale(1);
+ }
+}
+
+.form button:hover {
+ animation: buttonHover 0.5s ease-in-out;
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo"><img src="img/logo1.png" height="120"></div>
+    <nav class="navbar" id="navbar"> 
+        <ul class="Hmenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+<br><br><br><br><br><br><br><br><br>
+  <div class="form-container">
+    <form class="form" id="consultation-form" action="conect.php" method="POST">
+      <label for="cakeName">Cake Name:</label>
+      <input type="text" id="cakeName" name="cakeName" readonly>
+      <label for="cakePrice">Cake Price:</label>
+      <input type="text" id="cakePrice" name="cakePrice" readonly>
+      <label for="pricePerKg">Price per Kilogram (₹):</label>
+      <input type="number" id="pricePerKg" min="0" step="0.01">
+      <label for="kgInput">Enter Kilograms (0.5 to 10):</label>
+      <input type="number" id="kgInput" min="0.5" max="10" step="0.5">
+      
+      <p id="price">Price will be calculated here</p> 
+      <input name="Name" placeholder="Name" type="text">
+      <input name="phone" required="" placeholder="Phone number" type="tel">
+      <input name="email" required="" placeholder="E-mail" type="email">
+      <input required="" name="customization" placeholder="Customization" type="text">
+      <h2>Select Payment Method</h2>
+      
+      <label>
+        <input type="radio" name="paymentMethod" value="upi">
+        UPI (Unified Payments Interface)
+      </label>
+      <label>
+        <input type="radio" name="paymentMethod" value="bankTransfer">
+        Bank Transfer
+      </label>
+      <button class="Btn" >
+        Pay
+        <svg class="svgIcon" viewBox="0 0 576 512"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
+      </button>
+      
+    </form>
+  </div>
+  <div class="form-container">
+    <div class="safety-info">
+       <h3>Your Safety is Our Priority</h3>
+       <p>We use secure payment methods and offer delivery assurance. Your order is safe with us.</p>
+       <p>For any queries, contact our customer support at support@example.com.</p>
+    </div>
+    <!-- The rest of your form goes here -->
+   </div>
+   
+  <script>
+    
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const itemName = urlParams.get('itemName');
+    const itemPrice = urlParams.get('itemPrice');
+
+    if (itemName) {
+      document.getElementById('cakeName').value = itemName;
+    }
+    if (itemPrice) {
+      document.getElementById('cakePrice').value = itemPrice;
+      // Autofill the price per kilogram with the cake price
+      document.getElementById('pricePerKg').value = parseFloat(itemPrice).toFixed(2);
+    }
+
+    // Attach event listeners to input fields
+    document.getElementById('kgInput').addEventListener('input', calculatePrice);
+    document.getElementById('pricePerKg').addEventListener('input', calculatePrice);
+
+    // Calculate price initially
+    calculatePrice();
+  });
+
+  function calculatePrice() {
+    var kg = parseFloat(document.getElementById('kgInput').value);
+    var pricePerKg = parseFloat(document.getElementById('pricePerKg').value);
+    var totalPrice = kg * pricePerKg;
+    document.getElementById('price').textContent = "Price for " + kg + "kg is: ₹" + totalPrice.toFixed(2);
+  }
+</script>
+
+    }
+
+</body>
+</html>
